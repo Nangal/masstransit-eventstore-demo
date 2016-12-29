@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Topshelf;
 
 namespace Consumer
 {
@@ -10,6 +11,7 @@ namespace Consumer
     {
         static void Main(string[] args)
         {
+            HostFactory.Run(cfg => { cfg.Service(x => new CommandConsumerService()); });
         }
     }
 }

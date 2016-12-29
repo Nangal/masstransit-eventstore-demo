@@ -22,5 +22,19 @@ namespace Api.Controllers
 
             return Request.CreateResponse(new HttpResponseMessage(HttpStatusCode.NoContent));
         }
+
+        [Route("gebruiker")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> Gebruiker()
+        {
+            var endpoint = await ServiceBusConfig.BusControl.GetSendEndpoint(new Uri("rabbitmq://localhost/gebruiker"));
+
+            await endpoint.Send<CreateGebruiker>(new
+            {
+                Id = Guid.NewGuid()
+            });
+
+            return Request.CreateResponse(new HttpResponseMessage(HttpStatusCode.NoContent));
+        }
     }
 }
