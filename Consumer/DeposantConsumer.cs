@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Contracts.Commands;
+using Contracts.Notifications;
 using MassTransit;
 
 namespace Consumer
@@ -14,7 +11,12 @@ namespace Consumer
         {
             var command = context.Message;
 
-            Console.WriteLine("Consuming CreateDeposantCommand: " + command.Id);
+            context.Publish<DeposantCreatedNotification>(new
+            {
+                Title = "Deposant",
+                Message = $"Deposant with ID {command.Id} created",
+                Type = "success" 
+            });
           
             return Task.FromResult(0);
         }

@@ -40,10 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CreateDeposant.cs" />
     <Compile Include="Commands\CreateGebruiker.cs" />
+    <Compile Include="Events\Event.cs" />
+    <Compile Include="Notifications\GebruikerCreatedNotification.cs" />
+    <Compile Include="Notifications\DeposantCreatedNotification.cs" />
+    <Compile Include="Notifications\Notification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

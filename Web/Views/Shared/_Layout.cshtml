@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/toastr.css")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" role="main">
+        @RenderBody()
+        <hr />
+        <footer role="contentinfo">
+            <p>&copy; @DateTime.Now.Year - Application name</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/jquery.signalR-2.2.1.min.js")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/signalr/hubs")
+    @Scripts.Render("~/Scripts/toastr.js")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        // TOASTR OPTIONS
+        toastr.options = {
+            'closeButton': false,
+            'debug': false,
+            'newestOnTop': false,
+            'progressBar': false,
+            'preventDuplicates': true,
+            'onclick': null,
+            'showDuration': '5000',
+            'hideDuration': '1000',
+            'timeOut': '5000',
+            'extendedTimeOut': '1000',
+            'showEasing': 'swing',
+            'hideEasing': 'linear',
+            'showMethod': 'fadeIn',
+            'hideMethod': 'fadeOut'
+        };
+
+        // SIGNALR CONNECTION AND METHOD
+        $(function () {
+            var applicationHub = $.connection.applicationHub;
+
+            $.connection.hub.start()
+                .done(function () {
+                    toastr["info"]("SignalR started", "SignalR");
+               
+                })
+                .fail(function (data) {
+                    toastr["error"]("SignalR failed to connect: " + data, "SignalR");
+                });
+
+            // METHOD CALLED FROM SERVER-SIDE
+            applicationHub.client.sendToast = function (type, content, title) { 
+                toastr[type](content, title);
+            };
+        });
+    </script>
+</body>
+</html>

@@ -3,10 +3,12 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Contracts.Commands;
 
 namespace Api.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class CommandController : ApiController
     {
         [Route("deposant")]

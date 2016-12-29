@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Contracts.Commands;
+using Contracts.Notifications;
 using MassTransit;
 
 namespace Consumer
@@ -11,7 +12,12 @@ namespace Consumer
         {
             var command = context.Message;
 
-            Console.WriteLine("Consuming CreateGebruikerCommand: " + command.Id);
+            context.Publish<GebruikerCreatedNotification>(new
+            {
+                Title = "Gebruiker",
+                Message = $"Gebruiker with ID {command.Id} created",
+                Type = "success"
+            });
 
             return Task.FromResult(0);
         }

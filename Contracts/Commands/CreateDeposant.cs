@@ -2,8 +2,8 @@
 
 namespace Contracts.Commands
 {
-    public interface CreateDeposant
+    public interface CreateDeposant : Command
     {
-        Guid Id { get; set; }
+        string DeposantNummer { get; set; }
     }
 }

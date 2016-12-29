@@ -2,8 +2,8 @@
 
 namespace Contracts.Commands
 {
-    public interface CreateGebruiker
+    public interface CreateGebruiker : Command
     {
-        Guid Id { get; set; }
+        string BsnSofinummer { get; set; }
     }
 }
