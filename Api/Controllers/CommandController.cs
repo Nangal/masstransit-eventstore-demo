@@ -17,10 +17,7 @@ namespace Api.Controllers
         {
             var endpoint = await ServiceBusConfig.BusControl.GetSendEndpoint(new Uri("rabbitmq://localhost/deposant"));
 
-            await endpoint.Send<CreateDeposant>(new
-            {
-                Id = Guid.NewGuid()
-            });
+            await endpoint.Send<CreateDeposant>(new {});
 
             return Request.CreateResponse(new HttpResponseMessage(HttpStatusCode.NoContent));
         }
