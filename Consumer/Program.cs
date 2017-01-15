@@ -1,4 +1,6 @@
-﻿using MassTransit;
+﻿using Consumer.Registries;
+using Domain.Deposant;
+using Domain.Services.Deposant;
 using StructureMap;
 using Topshelf;
 using Topshelf.StructureMap;
@@ -19,15 +21,18 @@ namespace Consumer
                         scan.WithDefaultConventions();
                     });
 
+                    cfg.For<IDeposantService>().Use<DeposantService>();
+
                     cfg.ForConcreteType<DeposantConsumer>();
                     cfg.ForConcreteType<GebruikerConsumer>();
 
+                    cfg.AddRegistry<BusRegistry>();
                     cfg.AddRegistry<EventStoreRegistry>();
                 });
 
                 c.UseStructureMap(container);
 
-                c.Service<SampleService>(s =>
+                c.Service<CommandConsumerService>(s =>
                 {
                     s.ConstructUsingStructureMap();
 

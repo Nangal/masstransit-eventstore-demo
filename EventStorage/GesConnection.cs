@@ -13,7 +13,11 @@ namespace EventStorage
             var settings = ConnectionSettings.Create()
                .UseConsoleLogger();
 
-            return EventStoreConnection.Create(settings, new IPEndPoint(IPAddress.Loopback, Defaultport));
+            var connection = EventStoreConnection.Create(settings, new IPEndPoint(IPAddress.Loopback, Defaultport));
+
+            connection.ConnectAsync().Wait();
+
+            return connection;
         }
     }
 }

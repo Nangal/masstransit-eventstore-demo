@@ -1,4 +1,4 @@
-﻿namespace Consumer
+﻿namespace Consumer.Config
 {
     public interface IApplicationSettings
     {

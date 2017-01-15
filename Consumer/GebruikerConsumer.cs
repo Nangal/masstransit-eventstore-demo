@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Contracts.Commands;
 using Contracts.Notifications;
 using MassTransit;

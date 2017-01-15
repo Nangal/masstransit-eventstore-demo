@@ -29,7 +29,7 @@ namespace EventStorage
                     .ReadStreamEventsForwardAsync(streamName, nextSliceStart, 200, false)
                     .Result;
                 nextSliceStart = currentSlice.NextEventNumber;
-                events.AddRange(currentSlice.Events.Select(x => ExtendsGesRepository.DeserializeEvent(x)));
+                events.AddRange(currentSlice.Events.Select(x => x.DeserializeEvent()));
             } while (!currentSlice.IsEndOfStream);
 
             var aggregate = _factory.Create<T>(events);

@@ -1,12 +1,11 @@
-﻿using System;
-using Consumer.EventStoreHelloWorld;
+﻿using Consumer.Config;
+using Consumer.Config.EventStoreHelloWorld;
 using Domain;
 using EventStorage;
 using EventStore.ClientAPI;
-using MassTransit;
 using StructureMap;
 
-namespace Consumer
+namespace Consumer.Registries
 {
     public class EventStoreRegistry : Registry
     {

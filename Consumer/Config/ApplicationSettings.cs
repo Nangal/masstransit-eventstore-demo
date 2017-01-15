@@ -1,8 +1,8 @@
-﻿namespace Consumer
-{
-    using System;
-    using System.Configuration;
+﻿using System;
+using System.Configuration;
 
+namespace Consumer.Config
+{
     namespace EventStoreHelloWorld
     {
         public class ApplicationSettings : IApplicationSettings
